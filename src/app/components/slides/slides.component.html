@@ -1,0 +1,34 @@
+<!-- Slides Card -->
+<ng-container *ngIf="values; else elseTemplate">
+  <mat-spinner *ngIf="slides.length === 0" class="spinner" color="accent"></mat-spinner>
+  <mat-grid-list [class.mobileList]="mobileQuery.matches" [cols]="getCols()" [rowHeight]="mobileQuery.matches ? '425px' : laptopQuery.matches ? '450px' : desktopQuery.matches ? '475px' : '500px'">
+    <mat-grid-tile *ngFor="let item of items; let i = index">
+      <mat-card class="mat-elevation-z3">
+        <img class="card-img" [src]="item.image">
+        <mat-card-content>
+          <p>Last change on {{ item.date | date: 'EEEE, d MMMM y' }} at {{ item.date | date: 'H:mm:ss' }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-button color="primary" routerLink="/slides/analyze/{{ item.id }}">Analyze</a>
+          <button mat-button color="primary" routerLink="/slides/see/{{ item.id }}">See</button>
+          <button mat-icon-button matTooltip="Delete" color="primary" class="delete" (click)="showDialog(item.id, i)"><mat-icon>delete_outline</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-paginator #slidesPaginator *ngIf="slides.length > 0" [class.paginator]="items.length <= getCols()" [length]="slides.length" [pageSize]="2*getCols()" [pageSizeOptions]="[1*getCols(), 2*getCols(), 5*getCols(), 20*getCols()]" (page)="changeItems($event)"></mat-paginator>
+</ng-container>
+
+<!-- No Slides -->
+<ng-template #elseTemplate>
+  <main>
+    <div class="wrapper">
+      <img src="../../assets/images/noslidesfound.png" class="img">
+      <div>
+        <h1>I'm waiting for your first slide</h1>
+        <p>Seems like there isn't even a slide. Upload slides to start analyzing them.</p>
+        <a mat-raised-button color="primary" routerLink="/uploads">Upload Slides</a>
+      </div>
+    </div>
+  </main>
+</ng-template>
