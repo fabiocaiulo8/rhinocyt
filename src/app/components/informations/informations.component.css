@@ -1,0 +1,34 @@
+.spinner {
+  position: fixed;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 3;
+}
+
+.page {
+  margin-bottom: 25px;
+}
+
+table {
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 400;
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
